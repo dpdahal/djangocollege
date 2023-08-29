@@ -22,22 +22,21 @@
                           <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/">Home</a>
                           </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="/news">News</a>
-                          </li>
+                          
                           <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               Category
                             </a>
                             <ul class="dropdown-menu">
                               {% for category in categoryData %}
-                              <li><a class="dropdown-item" href="#">{{category.name}}</a></li>
+                              <li><a class="dropdown-item" href="{% url 'category' category.slug %}">{{category.name}}</a></li>
                               {% endfor %}
                             </ul>
                           </li>                          
                         </ul>
-                        <form class="d-flex" role="search">
-                          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <form class="d-flex" action="{% url 'index' %}" role="search" method="post">
+                          {% csrf_token %}                          
+                          <input class="form-control me-2" type="search" name="criteria" placeholder="Search" aria-label="Search">
                           <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
                       </div>

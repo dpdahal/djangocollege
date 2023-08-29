@@ -22,9 +22,13 @@ class News(models.Model):
     image = models.ImageField(upload_to='news',blank=True)
     description = RichTextField(blank=True,null=True)
     page_views = models.IntegerField(default=0)
+    is_banner =  models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
     
     class Meta:
         verbose_name_plural = 'News'
+
+    def limit_description(self):
+        return self.description[:200] + '...'

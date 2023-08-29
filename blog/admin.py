@@ -19,9 +19,9 @@ class AdminCategory(admin.ModelAdmin):
 
 @admin.register(News)
 class AdminNews(admin.ModelAdmin):
-    list_display=['title','category','show_image','created_at']
+    list_display=['title','category','show_image','is_banner','created_at']
     prepopulated_fields={'slug':('title',)}
-    list_editable=['category']
+    list_editable=['category','is_banner']
     search_fields=['title','slug']
     list_filter=['category','created_at']
 

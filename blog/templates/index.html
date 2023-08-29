@@ -7,15 +7,22 @@
     <div class="col-md-12">
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
+              {% for banner in bannerData %}
+              {% if forloop.counter == 1 %}
               <div class="carousel-item active">
-                <img src="{% static 'image/a.jpg' %}" class="d-block w-100" alt="...">
+                {% if banner.image %}
+                <img src="{{banner.image.url}}" height="450" class="d-block w-100" alt="...">
+                {% endif %}
               </div>
+              {% else %}
               <div class="carousel-item">
-                <img src="{% static 'image/a.jpg' %}" class="d-block w-100" alt="...">
+                {% if banner.image %}
+                <img src="{{banner.image.url}}" height="450" class="d-block w-100" alt="...">
+                {% endif %}
               </div>
-              <div class="carousel-item">
-                <img src="{% static 'image/a.jpg' %}" class="d-block w-100" alt="...">
-              </div>
+              {% endif %}
+              {% endfor %}
+             
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -38,36 +45,23 @@
     </div>
 </div>
 <div class="row mt-3">
+  {% for news in newsData%}
     <div class="col-md-4 mb-3">
         <div class="card">
-            <img src="{% static 'image/a.jpg' %}" class="card-img-top" alt="...">
+          {% if news.image %}
+            <img src="{{news.image.url}}" height="200" class="card-img-top" alt="...">
+          {% endif %}
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="news" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title"><a href="{% url 'news' news.slug %}">{{news.title}}</a></h5>
+              <p class="card-text">
+                {{news.limit_description | safe}}
+              </p>
+              <a href="{% url 'news' news.slug %}" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
     </div>
-    <div class="col-md-4 mb-3">
-        <div class="card">
-            <img src="{% static 'image/a.jpg' %}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="news" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-    </div>
-    <div class="col-md-4 mb-3">
-        <div class="card">
-            <img src="{% static 'image/a.jpg' %}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="news" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-    </div>
+    {% endfor %}
+    
 </div>
 
 {% comment %} end news section {% endcomment %}

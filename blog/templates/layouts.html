@@ -30,8 +30,9 @@
                               Category
                             </a>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">Education</a></li>
-                              <li><a class="dropdown-item" href="#">Sports</a></li>
+                              {% for category in categoryData %}
+                              <li><a class="dropdown-item" href="#">{{category.name}}</a></li>
+                              {% endfor %}
                             </ul>
                           </li>                          
                         </ul>

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.helper.global_data',
             ],
         },
     },
@@ -118,10 +121,21 @@ USE_TZ = True
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = BASE_DIR / "uploads"
+MEDIA_URL = '/uploads/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 1000,
+    },
+}

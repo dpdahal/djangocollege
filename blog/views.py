@@ -2,6 +2,14 @@ from django.shortcuts import render
 from .models import *
 from django.http import HttpResponse
 from django.db.models import Q
+from rest_framework import  viewsets
+from .news_serializer import NewsSerializer
+
+class NewsViews(viewsets.ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+
 
 # Create your views here.
 def index(request):

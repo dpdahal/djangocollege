@@ -32,3 +32,8 @@ class News(models.Model):
 
     def limit_description(self):
         return self.description[:200] + '...'
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=100)

@@ -12,5 +12,6 @@ urlpatterns = [
     path('news/<slug>',views.news_details,name='news'),
     path('category/<slug>',views.category_news,name='category'),
     path('api', include(router.urls)),
+    path('pay',views.paykhalti,name='pay')
 
 ]

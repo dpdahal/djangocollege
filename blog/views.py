@@ -4,6 +4,40 @@ from django.http import HttpResponse
 from django.db.models import Q
 from rest_framework import  viewsets
 from .news_serializer import NewsSerializer
+import requests
+import json
+from djangophoenix import settings
+
+def paykhalti(request):
+    key = settings.env('KEY')
+    api_url = settings.env("API_URL")
+    url = f"{api_url}"
+
+    payload = json.dumps({
+        "return_url": "http://127.0.0.1:8000/",
+        "website_url": "http://127.0.0.1:8000/",
+        "amount": "1000",
+        "purchase_order_id": "Order01",
+        "purchase_order_name": "test",
+        "customer_info": {
+        "name": "Sophia",
+        "email": "sophia@gmail.com",
+        "phone": "9800000001"
+        }
+    })
+    headers = {
+        'Authorization': f'key {key}',
+        'Content-Type': 'application/json',
+    }
+
+    res = requests.request("POST", url, headers=headers, data=payload)
+    return HttpResponse(res.text)
+
+
+
+
+
+
 
 class NewsViews(viewsets.ModelViewSet):
     queryset = News.objects.all()
